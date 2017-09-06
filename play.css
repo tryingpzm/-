@@ -78,16 +78,16 @@ a {
     z-index: 2;
     animation: rotate 20s linear infinite;
 }
-.playPageMiddle .playIcon{
-    position: absolute;
-    left:50%;
-    top:50%;
-    transform:translateX(-50%) translateY(-50%);
-    width:45px;
-    height:45px;
-    background:url(https://i.loli.net/2017/09/06/59afe62ae3da4.png) -48px 0 no-repeat;
-    z-index:5;
-}
+/*.playPageMiddle .playIcon{*/
+    /*position: absolute;*/
+    /*left:50%;*/
+    /*top:50%;*/
+    /*transform:translateX(-50%) translateY(-50%);*/
+    /*width:45px;*/
+    /*height:45px;*/
+    /*background:url(https://i.loli.net/2017/09/06/59afe62ae3da4.png) -48px 0 no-repeat;*/
+    /*z-index:5;*/
+/*}*/
 .playPageMiddle.pseudoMiddle::after {
     content: '';
     position: absolute;
