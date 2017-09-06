@@ -16,10 +16,20 @@ h1,h2,h3,h4,h5,h6{
 ol,ul{
     list-style:none;
 }
+.iconX{
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
 .clearfix::after{
     content:'';
     display:block;
     clear:both;
+}
+.noCollapse::before{
+    content:'';
+    display:table;
 }
 section.top{
     position:fixed;
@@ -65,7 +75,7 @@ section.topbar{
     position:relative;
     background-color: #fff;
 }
-.globalTabs::before{
+.horizonLine::before{
     content:"";
     position: absolute;
     left:0;
@@ -103,7 +113,7 @@ section.topbar{
 
 ol.mainContent>li{
     display:none;
-    margin-top:124px;
+    margin-top:105px;
 }
 ol.mainContent>li.active{
     display:block;
@@ -113,7 +123,7 @@ ol.mainContent>li.contentPage1>h2,h2.newMusic{
     position: relative;
     height:20px;
     line-height:20px;
-    margin-top:19px;
+    margin-top:20px;
     margin-bottom:15px;
     padding-left:9px;
 }
@@ -125,6 +135,10 @@ li.contentPage1>h2::after,h2.newMusic::after{
     width:2px;
     background-color: #d33a31;
 }
+/*.musicLoading .iconX{*/
+    /*width:50px;*/
+    /*height:50px;*/
+/*}*/
 .mainImages{
     margin-bottom:25px;
 }
@@ -168,6 +182,16 @@ li.contentPage1>h2::after,h2.newMusic::after{
     background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMCI+PGcgb3BhY2l0eT0iLjE1Ij48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiMwNDAwMDAiIGQ9Im0yMiAxNi43NzdjMCAxLjIzMy0xLjEyMSAyLjIzMy0yLjUwNiAyLjIzMy0xLjM4NCAwLTIuNTA2LTEtMi41MDYtMi4yMzN2LTIuNTUzYzAtMS4yMzQgMS4xMjItMi4yMzMgMi41MDYtMi4yMzMuMTc0IDAgLjM0My4wMTcuNTA2LjA0NnYtMS4zN2gtLjAzM2MuMDE3LS4yMi4wMzMtLjQ0MS4wMzMtLjY2NiAwLTQuNDE4LTMuNTgyLTgtOC04LTQuNDE4IDAtOCAzLjU4Mi04IDggMCAuMjI1LjAxNi40NDYuMDM0LjY2NmgtLjAzNHYxLjM3Yy4xNjMtLjAyOS4zMzMtLjA0Ni41MDUtLjA0NiAxLjM4NCAwIDIuNTA2Ljk5OSAyLjUwNiAyLjIzM3YyLjU1M2MwIDEuMjMzLTEuMTIyIDIuMjMzLTIuNTA2IDIuMjMzcy0yLjUwNS0uOTk5LTIuNTA1LTIuMjMzdi0yLjU1M2MwLS4yNTguMDU5LS41MDEuMTQ4LS43My0uMDg1LS4xNDgtLjE0OC0uMzEtLjE0OC0uNDkzdi0yLjY2N2MwLS4wMjMuMDEyLS4wNDMuMDEzLS4wNjctLjAwNC0uMDg4LS4wMTMtLjE3Ni0uMDEzLS4yNjYgMC01LjUyMyA0LjQ3Ny0xMCAxMC0xMCA1LjUyMyAwIDEwIDQuNDc3IDEwIDEwIDAgLjA5LS4wMDkuMTc4LS4wMTQuMjY2LjAwMi4wMjQuMDE0LjA0NC4wMTQuMDY3djJjMCAuMzA2LS4xNDUuNTY5LS4zNi43NTMuMjI0LjMzNC4zNi43Mi4zNiAxLjEzOHYyLjU1MiIvPjwvZz48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNmZmYiIGQ9Im0yMCAxNi43NzdjMCAxLjIzMy0xLjEyMSAyLjIzMy0yLjUwNiAyLjIzMy0xLjM4NCAwLTIuNTA2LTEtMi41MDYtMi4yMzN2LTIuNTUzYzAtMS4yMzQgMS4xMjItMi4yMzMgMi41MDYtMi4yMzMuMTc0IDAgLjM0My4wMTcuNTA2LjA0NnYtMS4zN2gtLjAzM2MuMDE3LS4yMi4wMzMtLjQ0MS4wMzMtLjY2NiAwLTQuNDE4LTMuNTgyLTgtOC04LTQuNDE4IDAtOCAzLjU4Mi04IDggMCAuMjI1LjAxNi40NDYuMDM0LjY2NmgtLjAzNHYxLjM3Yy4xNjMtLjAyOS4zMzMtLjA0Ni41MDUtLjA0NiAxLjM4NCAwIDIuNTA2Ljk5OSAyLjUwNiAyLjIzM3YyLjU1M2MwIDEuMjMzLTEuMTIyIDIuMjMzLTIuNTA2IDIuMjMzcy0yLjUwNS0uOTk5LTIuNTA1LTIuMjMzdi0yLjU1M2MwLS4yNTguMDU5LS41MDEuMTQ4LS43My0uMDg1LS4xNDgtLjE0OC0uMzEtLjE0OC0uNDkzdi0yLjY2N2MwLS4wMjMuMDEyLS4wNDMuMDEzLS4wNjctLjAwNC0uMDg4LS4wMTMtLjE3Ni0uMDEzLS4yNjYgMC01LjUyMyA0LjQ3Ny0xMCAxMC0xMCA1LjUyMyAwIDEwIDQuNDc3IDEwIDEwIDAgLjA5LS4wMDkuMTc4LS4wMTQuMjY2LjAwMi4wMjQuMDE0LjA0NC4wMTQuMDY3djJjMCAuMzA2LS4xNDUuNTY5LS4zNi43NTMuMjI0LjMzNC4zNi43Mi4zNiAxLjEzOHYyLjU1MiIvPjwvc3ZnPg==) 0 no-repeat;
     background-size:10px 11px;
 }
+.loadingImage img{
+    content:'';
+    display:block;
+    width:50px;
+    height:50px;
+    margin:0 auto;
+    /*border:1px solid;*/
+    background:url("//i.loli.net/2017/09/06/59afce8b22d91.png") no-repeat;
+    background-size: cover;
+}
 .musicList>li{
     padding-top:8px;
     padding-bottom:8px;
@@ -194,7 +218,7 @@ li.contentPage1>h2::after,h2.newMusic::after{
 }
 
 .icon{
-    background:url(images/index_icon_2x.png) -24px 0 no-repeat ;
+    background:url(https://i.loli.net/2017/09/06/59afe62ae3da4.png) -24px 0 no-repeat ;
     background-size:166px 97px;
 }
 .musicList a .playIcon{
@@ -206,8 +230,6 @@ li.contentPage1>h2::after,h2.newMusic::after{
     top:50%;
     transform:translateY(-50%);
     right:10px;
-    /*background:url(images/index_icon_2x.png) -24px 0 no-repeat ;*/
-    /*background-size:166px 97px;*/
 }
 .musicList a .SQIcon{
     display:inline-block;
@@ -219,7 +241,7 @@ li.contentPage1>h2::after,h2.newMusic::after{
 .footer{
     text-align:center;
     margin-bottom:15px;
-    background:url(images/footer-bci.png) no-repeat center;
+    background:url(https://i.loli.net/2017/09/06/59afe59f2bbf5.png) no-repeat center;
     background-size:cover;
 }
 .footer .logosvg{
@@ -233,12 +255,101 @@ li.contentPage1>h2::after,h2.newMusic::after{
     color:#d33a31;
     padding:8px 18px;
     border:1px solid #d33a31;
-    margin:0 37px;
+    margin:0 37px 5px;
     border-radius:38px;
-    margin-bottom:5px;
+
 }
 .footer .copyRight{
     font-size:12px;
     color:#888;
     transform:scale(0.75)
+}
+
+.page3Form{
+    /*border:1px solid;*/
+    position: relative;
+    padding:16px 0;
+}
+.inputIcon{
+    position: absolute;
+    left:3.125%;
+    top:50%;
+    background: url(https://i.loli.net/2017/09/06/59afe7c717b21.png) 0 0 no-repeat;
+    background-size:cover;
+    width:24px;
+    height:24px;
+    margin:0 3px;
+    transform:translateY(-50%);
+    z-index: 1;
+    /*border:1px solid;*/
+}
+.page3Input{
+    display:block;
+    position: relative;
+    margin:0 auto;
+    width:93.75%;
+    height:30px;
+    border-radius:10%/100%;
+    background-color: #EBECEC;
+    font-size:14px;
+    padding:0 10%;
+    outline:none;
+}
+.searchH2{
+    position: relative;
+    font-size:15px;
+    padding:17px 10px;
+    color:#507DAF;
+}
+.searchLi{
+    position: relative;
+    padding:15px 0 15px 10%;
+}
+.searchLi p{
+    /*font-size:15px;*/
+}
+.searchLi i.inputIcon{
+    left:2%;
+    width:25px;
+    height:25px;
+    margin:0 2px;
+}
+
+.page2Top{
+    background:url(https://i.loli.net/2017/09/06/59afe6ee9621d.jpg) 0 0 no-repeat;
+    background-size:cover;
+    width:100%;
+    height:125px;
+    padding-left:20px;
+    padding-top:15px;
+}
+.page2TopImg{
+    width:142px;
+    height:67px;
+    background:url(https://i.loli.net/2017/09/06/59afe62ae3da4.png) -22px -30px no-repeat ;
+    background-size:166px 97px;
+}
+.page2Top p{
+    font-size:12px;
+    transform:scale(0.9);
+    transform-origin:left top;
+    margin-top:10px;
+    color: hsla(0,0%,100%,.8);
+}
+.contentPage2 .musicList li{
+    position: relative;
+    padding-left:25px;
+}
+
+.contentPage2 .musicList .page2MusicNumber{
+    position:absolute;
+    text-align:center;
+    left:0;
+    top:50%;
+    width:35px;
+    transform:translateY(-50%);
+    font-size:17px;
+}
+.contentPage2 .musicList li:nth-child(-n+3) .page2MusicNumber{
+    color: #df3436;
 }

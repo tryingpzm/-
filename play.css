@@ -1,0 +1,191 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.playPageWrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100vh;
+
+}
+
+.playPageWrapper::before {
+    content: '';
+    position: absolute;
+    left: 44.8vw;
+    top: 0;
+    z-index: 3;
+    width: 100px;
+    height: 123px;
+    background: url(https://i.loli.net/2017/09/06/59afe6ee82977.png) no-repeat;
+    background-size: contain;
+}
+
+.wrapperBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    filter: blur(100px) brightness(0.3);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.playPageMiddle {
+    margin: 11.1vh auto 0;
+    width: 78.125vw;
+    height: 78.124vw;
+    /*border:1px solid;*/
+    position: relative;
+    display: flex;
+    justify-content: center;;
+    align-items: center;
+}
+
+.playPageMiddle::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;;
+    height: 100%;
+    border-radius: 50%;
+    background: url(https://i.loli.net/2017/09/06/59afe518b2084.png) no-repeat;
+    background-size: contain;
+    z-index: 1;
+}
+
+.playPageMiddle::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;;
+    height: 100%;
+    border-radius: 50%;
+    background: url(https://i.loli.net/2017/09/06/59afe55850c3c.png) no-repeat;
+    background-size: contain;
+    z-index: 2;
+    animation: rotate 20s linear infinite;
+}
+.playPageMiddle .playIcon{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform:translateX(-50%) translateY(-50%);
+    width:45px;
+    height:45px;
+    background:url(https://i.loli.net/2017/09/06/59afe62ae3da4.png) -48px 0 no-repeat;
+    z-index:5;
+}
+.playPageMiddle.pseudoMiddle::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;;
+    height: 100%;
+    border-radius: 50%;
+    background: url(https://i.loli.net/2017/09/06/59afe55850c3c.png) no-repeat;
+    background-size: contain;
+    z-index: 2;
+    animation:norotate;
+}
+.middleCenter {
+    width: 46.875vw;
+    height: 46.875vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: rotate 20s linear infinite;
+}
+.norotate{
+    animation:norotate;
+}
+@keyframes norotate {
+    0%{
+        transform: rotateZ(0deg)
+    }
+    100%{
+        transform:rotateZ(0deg);
+    }
+}
+@keyframes rotate {
+    from {
+        transform: rotateZ(0deg)
+    }
+    to {
+        transform: rotateZ(360deg)
+    }
+}
+
+.playPageLyric {
+    /*margin-top:18px;*/
+    /*border:1px solid;*/
+    flex-grow: 1;
+}
+
+.lyricTop {
+    text-align: center;
+    margin: 18px 0;
+}
+
+.lyricTop .songName {
+    font-size: 15px;
+    color: #fefefe;
+}
+
+.lyricTop .songSinger {
+    font-size: 13px;
+    color: hsla(0, 0%, 100%, .6);
+}
+
+.lyricContent {
+    height: 72px;
+    overflow: hidden;
+}
+
+.lyricContent .lyricLine {
+    padding-bottom: 5px;
+    line-height: 1.5;
+    font-size: 13px;
+    text-align: center;
+}
+
+.lyricContent p.highlight {
+    color: #fff;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+.footer a {
+    padding: 7px 42px;
+    font-size: 15px;
+    border-radius: 4px;
+}
+
+.footer .open {
+    margin-right: 10px;
+    border: 1px solid #D43B32;
+    color: #D43B32;
+}
+
+.footer .close {
+    background-color: #D43B32;
+    color: #FFFFDE
+}
