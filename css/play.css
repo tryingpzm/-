@@ -76,19 +76,9 @@ a {
     background: url(https://i.loli.net/2017/09/06/59afe55850c3c.png) no-repeat;
     background-size: contain;
     z-index: 2;
-    animation: rotate 20s linear infinite;
+    /*animation: rotate 20s linear infinite;*/
 }
-/*.playPageMiddle .playIcon{*/
-    /*position: absolute;*/
-    /*left:50%;*/
-    /*top:50%;*/
-    /*transform:translateX(-50%) translateY(-50%);*/
-    /*width:45px;*/
-    /*height:45px;*/
-    /*background:url(https://i.loli.net/2017/09/06/59afe62ae3da4.png) -48px 0 no-repeat;*/
-    /*z-index:5;*/
-/*}*/
-.playPageMiddle.pseudoMiddle::after {
+.playPageMiddle.outerRotate::after{
     content: '';
     position: absolute;
     left: 0;
@@ -99,26 +89,48 @@ a {
     background: url(https://i.loli.net/2017/09/06/59afe55850c3c.png) no-repeat;
     background-size: contain;
     z-index: 2;
-    animation:norotate;
+    animation: rotate 20s linear infinite;
+}
+.pauseAnimation,.pauseAnimation::after{
+    animation-play-state: paused !important;
+}
+.middleIcon{
+    /*width:*/
+    width:50px;
+    height:50px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    color:#f00;
+    transform:translateX(-50%) translateY(-50%  );
+    fill:#aaa;
+    z-index:5;
+    /*display:none;*/
+}
+.hidden{
+    display:none;
 }
 .middleCenter {
     width: 46.875vw;
     height: 46.875vw;
     background-repeat: no-repeat;
     background-size: cover;
+    /*animation: rotate 20s linear infinite;*/
+}
+.rotate{
     animation: rotate 20s linear infinite;
 }
-.norotate{
-    animation:norotate;
-}
-@keyframes norotate {
-    0%{
-        transform: rotateZ(0deg)
-    }
-    100%{
-        transform:rotateZ(0deg);
-    }
-}
+/*.norotate{*/
+    /*animation:norotate;*/
+/*}*/
+/*@keyframes norotate {*/
+    /*0%{*/
+        /*transform: rotateZ(0deg)*/
+    /*}*/
+    /*100%{*/
+        /*transform:rotateZ(0deg);*/
+    /*}*/
+/*}*/
 @keyframes rotate {
     from {
         transform: rotateZ(0deg)
