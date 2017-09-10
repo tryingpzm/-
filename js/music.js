@@ -51,12 +51,11 @@ query.contains("class","recommend");
 query.find().then(function (results) {
     for (var i = 0; i < results.length; i++) {
         var attr = results[i].attributes
-        var li = '<li><a href=' + results[i].id + '"../play.html?id="><p>' + attr.name + '</p><small><i class="SQIcon icon"></i>' + attr.singer + '</small><apan class="playIcon icon"></apan></a></li>';
+        var li = '<li><a href="../html/play.html?id=' + results[i].id + '"><p>' + attr.name + '</p><small><i class="SQIcon icon"></i>' + attr.singer + '</small><apan class="playIcon icon"></apan></a></li>';
         $(".contentPage1 .musicList").append(li);
     }
     $(".loadingImage").css("display","none");
 }, function (error) {
-    // console.log("对不起，没有匹配的结果" + error)
 });
 
 var queryHot = new AV.Query("Song");
@@ -65,11 +64,10 @@ queryHot.find().then(function (results) {
     for (var i = 0; i < results.length; i++) {
         var attr = results[i].attributes
         var Page2MusicNumber = (i + 1) >= 10 ? (i + 1).toString() : ("0" + (i + 1).toString());
-        var li2 = '<li><a href=' + results[i].id + '"../play.html?id="><span class="page2MusicNumber">' + Page2MusicNumber + '</span><p>' + attr.name + '</p><small><i class="SQIcon icon"></i>' + attr.singer + '</small><apan class="playIcon icon"></apan></a></li>';
+        var li2 = '<li><a href="../html/play.html?id=' + results[i].id + '"><span class="page2MusicNumber">' + Page2MusicNumber + '</span><p>' + attr.name + '</p><small><i class="SQIcon icon"></i>' + attr.singer + '</small><apan class="playIcon icon"></apan></a></li>';
         $(".contentPage2 .musicList").append(li2);
     }
 }, function (error) {
-    // console.log("对不起，没有匹配的结果" + error)
 });
 
 //input相关
@@ -84,7 +82,6 @@ page3Input.addEventListener("input", function () {
         timer=null;
         searchResults.innerHTML = "";
         var value = page3Input.value.trim();
-        console.log(value)
         if (value.length === 0) return;
         var searchH2 = "<a href='#'><h2 class='searchH2 horizonLine'>搜索\"" + value + "\"</h2></a>";
         // searchResults.innerHTML=searchH2;
@@ -106,7 +103,7 @@ page3Input.addEventListener("input", function () {
         query.find().then(function (results) {
             for (var i = 0; i < results.length; i++) {
                 var resultsAttr = results[i].attributes;
-                var searchLi = "<li class='searchLi horizonLine'><a href=" + results[i].id + "'../play.html?id=&haha'><i class='inputIcon'></i><p>" + resultsAttr.name + "</p></a></li>"
+                var searchLi = "<li class='searchLi horizonLine'><a href='../html/play.html?id=&haha" + results[i].id + "'><i class='inputIcon'></i><p>" + resultsAttr.name + "</p></a></li>"
                 searchLis+=searchLi;
             }
             searchOl.innerHTML=searchLis;
