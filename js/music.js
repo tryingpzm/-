@@ -6,10 +6,20 @@ var tabsDivs = document.querySelectorAll(".globalTabs>li>div");
 var tabsDivsSpans = document.querySelectorAll(".globalTabs>li>div>span");
 var mainContentLis = document.querySelectorAll(".mainContent>li")
 
-var listImages=document.querySelectorAll(".mainImages li img");
-for(var i=0;i<listImages.length;i++){
-    listImages[i].setAttribute("src",listImages[i].getAttribute("data-src"));
-}
+// var listImages=document.querySelectorAll(".mainImages li img");
+// for(var i=0;i<listImages.length;i++){
+//     listImages[i].setAttribute("src",listImages[i].getAttribute("data-src"));
+// }
+//思路，获取images,监听load事件，只要有一个
+var $images=$(".mainImages img");
+var ak=0;
+$images.on("load",function(){
+    ak++;
+    if(ak===6){
+        $(".mainImages").addClass("show")
+    }
+})
+setTimeout(function(){$(".mainImages").addClass("show")},2000)
 
 globalTabs.addEventListener("click", function (e) {
     if (e.target.tagName !== "SPAN") return;
