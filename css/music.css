@@ -357,3 +357,6 @@ li.contentPage1>h2::after,h2.newMusic::after{
 .contentPage2 .musicList li:nth-child(-n+3) .page2MusicNumber{
     color: #df3436;
 }
+.searchResults .noResult{
+    padding:16px;
+}

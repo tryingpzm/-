@@ -16,10 +16,13 @@ var ak=0;
 $images.on("load",function(){
     ak++;
     if(ak===6){
-        $(".mainImages").addClass("show")
+        $(".mainImages").addClass("show");
+        $(".load1").css({display:"none"});
     }
 })
-setTimeout(function(){$(".mainImages").addClass("show")},2000)
+setTimeout(function(){$(".mainImages").addClass("show")
+    $(".load1").css({display:"none"});
+},2000)
 
 globalTabs.addEventListener("click", function (e) {
     if (e.target.tagName !== "SPAN") return;
@@ -64,7 +67,7 @@ query.find().then(function (results) {
         var li = '<li><a href="../html/play.html?id=' + results[i].id + '"><p>' + attr.name + '</p><small><i class="SQIcon icon"></i>' + attr.singer + '</small><apan class="playIcon icon"></apan></a></li>';
         $(".contentPage1 .musicList").append(li);
     }
-    $(".loadingImage").css("display","none");
+    $(".load2").css("display","none");
 }, function (error) {
 });
 
@@ -94,23 +97,18 @@ page3Input.addEventListener("input", function () {
         var value = page3Input.value.trim();
         if (value.length === 0) return;
         var searchH2 = "<a href='#'><h2 class='searchH2 horizonLine'>搜索\"" + value + "\"</h2></a>";
-        // searchResults.innerHTML=searchH2;
-        // var searchOlHead = "<ol>"
-        // var searchOlFoot = "</ol>"
         var searchOl=document.createElement("ol");
         var searchLis="";
         var queryName = new AV.Query("Song")
         queryName.contains("name", value);
-        // var queryName2 = new AV.Query("HotSong")
-        // queryName2.contains("name", value);
         var querySinger = new AV.Query("Song");
         querySinger.contains("singer", value);
-        // var querySinger2 = new AV.Query("HotSong");
-        // querySinger2.contains("singer", value);
         var query = AV.Query.or(queryName, querySinger);
-        // var query2 = AV.Query.or(queryName2, querySinger2);
-        // query.contains("singer",page3Input.value);
         query.find().then(function (results) {
+            if(results.length===0){
+                searchResults.innerHTML="<p class='noResult'>对不起，无搜索结果</p>"
+                return;
+            }
             for (var i = 0; i < results.length; i++) {
                 var resultsAttr = results[i].attributes;
                 var searchLi = "<li class='searchLi horizonLine'><a href='../html/play.html?id=&haha" + results[i].id + "'><i class='inputIcon'></i><p>" + resultsAttr.name + "</p></a></li>"
@@ -119,17 +117,6 @@ page3Input.addEventListener("input", function () {
             searchOl.innerHTML=searchLis;
             searchResults.innerHTML=searchH2+searchOl.outerHTML;
         });
-        // query2.find().then(function (results) {
-        //     for (var i = 0; i < results.length; i++) {
-        //         var resultsAttr = results[i].attributes;
-        //         var searchLi = "<li class='searchLi horizonLine'><a href='" + resultsAttr.url + "'><i class='inputIcon'></i><p>" + resultsAttr.name + "</p></a></li>"
-        //         searchLis+=searchLi;
-        //     }
-        //     searchOl.innerHTML=searchLis;
-        //     searchResults.innerHTML=searchH2+searchOl.outerHTML;
-        // });
     },300)
-
-
 });
 
