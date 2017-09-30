@@ -1,71 +1,60 @@
 /**
  * Created by Administrator on 2017/8/29.
  */
-var search = location.search;
-var id = search.match(/id=(\w+)/)[1];
-var APP_ID = 'p8oGkHwscTF8Bmo5SuCO5rAi-gzGzoHsz';
-var APP_KEY = '8PReePu94MLda6uU4aCA285M';
+function databaseInit(){
+    var APP_ID = 'p8oGkHwscTF8Bmo5SuCO5rAi-gzGzoHsz';
+    var APP_KEY = '8PReePu94MLda6uU4aCA285M';
 
-AV.init({
-    appId: APP_ID,
-    appKey: APP_KEY
-});
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+}
+databaseInit();
 
-var query = new AV.Query('Song');
-//通过id获取歌曲之后进行操作
-query.get(id).then(function (results) {
-    var resultsAttr = results.attributes;
-    var url = resultsAttr.url;
-    var name = resultsAttr.name;
-    var singer = resultsAttr.singer;
-    var image = resultsAttr.image;
-    var lyricJSON = resultsAttr.lyric;
-    var audio = document.createElement("audio")
-    audio.src = url;
-    // audio.play();
-    //播放按钮点击开始播放并转动
+function idSearchPromise(){
+    var id = location.search.match(/id=(\w+)/)[1];
+    var query = new AV.Query('Song');
+    return query.get(id)
+}
+function addRemoveHidden(selector1,selector2){
+    $(selector1).addClass("hidden");
+    $(selector2).removeClass("hidden");
+}
+function playIconClick(audio){
     $(".playIcon").on("click",function(){
         audio.play();
         $(".playPageMiddle").removeClass("pauseAnimation").addClass("outerRotate");
         $(".middleCenter").removeClass("pauseAnimation").addClass("rotate")
-        $(this).addClass("hidden");
-        $(".pauseIcon").removeClass("hidden");
+        addRemoveHidden(this,".pauseIcon");
     })
+}
+function pauseIconClick(audio){
     $(".pauseIcon").on("click",function(){
         audio.pause();
         $(".playPageMiddle").addClass("pauseAnimation")
         $(".middleCenter").addClass("pauseAnimation");
-        $(this).addClass("hidden");
-        $(".playIcon").removeClass("hidden");
-
+        addRemoveHidden(this,".playIcon")
     })
-    //播放结束停止转动
+}
+function audioEnded(audio){
     audio.onended=function(){
-        // clearInterval(ly);
         $(".playPageMiddle").removeClass("outerRotate");
         $(".middleCenter").removeClass("rotate")
-        $(".playIcon").removeClass("hidden").on("click",function(){
-
-        });
-        $(".pauseIcon").addClass("hidden");
-
+        addRemoveHidden(".pauseIcon",".playIcon")
     }
-    //背景设置
+}
+function backgroundSet(image){
     $(".wrapperBackground").css("background-image", "url(" + image + ")");
     $(".middleCenter").css("background-image", "url(" + image + ")");
-
-    //歌词处理
-    var lyric = JSON.parse(lyricJSON).lyric;
-    var lyricArr = lyric.split("\n")
-    $(".lyricTop").append("<apan class='songName'>" + name + " - </apan><span class='songSinger'>" + singer + "</span>")
-    var lyricArrObj = lyricArr.map(function (ele, index) {
+}
+function lyricMap(lyricArr){
+    return lyricArr.map(function (ele) {
         if (ele === "") return;
-        var RexExp = /\[(.+)\]/;
-        var RexExp2 = /\](.*)/;
-        var currentTime = ele.match(RexExp)[1]
+        var currentTime = ele.match(/\[(.+)\]/)[1]
         var currentTimeArr = currentTime.split(":")
         currentTime = currentTimeArr[0] * 60 + Number(currentTimeArr[1]);
-        var currentLyric = ele.match(RexExp2)[1];
+        var currentLyric = ele.match(/\](.*)/)[1];
         var newP = $("<p class='lyricLine' data-time='" + currentTime + "'>" + currentLyric + "</p>")
         $(".lyricScroll").append(newP)
         return {
@@ -73,9 +62,17 @@ query.get(id).then(function (results) {
             lyric: currentLyric,
             distance: newP.offset().top
         }
-    })
-    //歌词部分
-    var ly=setInterval(function () {
+    });
+}
+function lyricToArr(resultsAttr){
+    var lyric = JSON.parse(resultsAttr.lyric).lyric;
+    var lyricArr = lyric.split("\n")
+    $(".lyricTop").append("<apan class='songName'>" + resultsAttr.name + " - </apan><span class='songSinger'>" + resultsAttr.singer + "</span>")
+    return lyricMap(lyricArr);
+}
+
+function lyricDisplay(lyricArrObj,audio) {
+    setInterval(function () {
         for (var i = 0; i < lyricArrObj.length; i++) {
             var audioTime = audio.currentTime;
             var lyricTime = lyricArrObj[i].time;
@@ -86,7 +83,7 @@ query.get(id).then(function (results) {
                 }
                 return;
             }
-            //前面的歌词都按照这个规则显示
+            //最后一行前面的歌词都按照这个规则显示
             if (audioTime >= lyricTime && audioTime < lyricArrObj[i + 1].time) {
                 if (lyricArrObj[i].lyric === "") return;
                 var currentElement = $(".lyricLine[data-time*='" + lyricTime + "']").eq(0)
@@ -97,4 +94,20 @@ query.get(id).then(function (results) {
             }
         }
     }, 200)
+}
+function setAudio(resultsAttr){
+    var audio = document.createElement("audio")
+    audio.src = resultsAttr.url;
+    return audio;
+}
+function clickOverEvents(audio){
+    playIconClick(audio);
+    pauseIconClick(audio);
+    audioEnded(audio);
+}
+idSearchPromise().then(function (results) {
+    var audio=setAudio(results.attributes);
+    clickOverEvents(audio);
+    backgroundSet(results.attributes.image);
+    lyricDisplay( lyricToArr(results.attributes),audio);
 });
